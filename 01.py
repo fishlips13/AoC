@@ -1,25 +1,14 @@
+from itertools import combinations
+from math import prod
+
 data = []
 with open("input/01.txt") as f:
     data = [int(i) for i in f.read().split("\n")]
 
-def part1():
-    for i in range(len(data)):
-        for j in range(len(data)):
-            
-            a, b = data[i], data[j]
-            if data[i] + data[j] == 2020:
-                print("Part 1 -> {} + {} = {}, {}".format(a, b, a+b, a*b))
-                return
+def willItBlend2020(data, count):
+    for comb in combinations(data, count):
+        if sum(comb) == 2020:
+            return "{} = {}, {}".format(" + ".join(map(str, comb)), str(sum(comb)), str(prod(comb)))
 
-def part2():
-    for i in range(len(data)):
-        for j in range(len(data)):
-            for k in range(len(data)):
-
-                a, b, c = data[i], data[j], data[k]
-                if a + b + c == 2020:
-                    print("Part 2 -> {} + {} + {} = {}, {}".format(a, b, c, a+b+c, a*b*c))
-                    return
-
-part1()
-part2()
+print("Part 1: " + willItBlend2020(data, 2))
+print("Part 2: " + willItBlend2020(data, 3))
