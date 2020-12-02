@@ -21,7 +21,7 @@ def part1():
         if letter_count >= password[0][0] and letter_count <= password[0][1]:
             valid_count += 1
 
-    print("Part1 Valid Password Count: " + str(valid_count))
+    print(f"Part 1 Count: {str(valid_count)}")
 
 def part2():
     valid_count = 0
@@ -39,7 +39,7 @@ def part2():
         if xor(first_occurs, second_occurs):
             valid_count += 1
     
-    print("Part2 Valid Password Count: " + str(valid_count))
+    print(f"Part 2 Count: {str(valid_count)}")
 
 part1()
 part2()
