@@ -1,14 +1,5 @@
 from operator import xor
 
-with open("input/02.txt") as f:
-    data = f.read().split("\n")
-
-for i in range(len(data)):
-    values = data[i].split(" ") # "0-1 a: aaaaa"
-    values[0] = [int(j) for j in values[0].split("-")]
-    values[1] = values[1][0]
-    data[i] = values # [0,1], "a", "aaaaa"
-
 def part1():
     valid_count = 0
     for password in data:
@@ -41,5 +32,14 @@ def part2():
     
     print(f"Part 2 Count: {str(valid_count)}")
 
+with open("input/02.txt") as f:
+    data = f.read().split("\n")
+
+for i in range(len(data)):
+    values = data[i].split(" ") # "0-1 a: aaaaa"
+    values[0] = [int(j) for j in values[0].split("-")]
+    values[1] = values[1][0]
+    data[i] = values # [0,1], "a", "aaaaa"
+    
 part1()
 part2()
