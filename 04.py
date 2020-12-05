@@ -5,14 +5,15 @@ with open("input/04.txt") as f:
 
 valid_fields = set(["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"])
 
-yr_re = re.compile(r"\d{4}")
-hgt_re = re.compile(r"\d+(cm|in)")
-hcl_re = re.compile(r"#[\da-f]{6}")
-ecl_re = re.compile(r"amb|blu|brn|gry|grn|hzl|oth")
-pid_re = re.compile(r"\d{9}")
+yr_re = re.compile(r"^\d{4}$")
+hgt_re = re.compile(r"^\d+(cm|in)$")
+hcl_re = re.compile(r"^#[\da-f]{6}$")
+ecl_re = re.compile(r"^amb|blu|brn|gry|grn|hzl|oth$")
+pid_re = re.compile(r"^\d{9}$")
 
 valid_count_1 = 0
 valid_count_2 = 0
+
 for passport in data:
 
     passport_fields = set(passport.keys())
@@ -21,7 +22,7 @@ for passport in data:
         continue
 
     valid_count_1 += 1
-
+    
     byr = int(yr_re.match(passport["byr"]).group())
     iyr = int(yr_re.match(passport["iyr"]).group())
     eyr = int(yr_re.match(passport["eyr"]).group())
