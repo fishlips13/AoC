@@ -1,6 +1,6 @@
 from math import prod
 
-def slope_trees(shift):
+def slope_trees(slope):
 
     x, y = 0, 0
     trees = 0
@@ -9,8 +9,8 @@ def slope_trees(shift):
         if data[y][x] == "#":
             trees += 1
         
-        x = (x + shift[0]) % len(data[0])
-        y += shift[1]
+        x = (x + slope[0]) % len(data[0])
+        y += slope[1]
     
     return trees
 
