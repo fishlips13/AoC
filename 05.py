@@ -8,7 +8,7 @@ with open("input/05.txt") as f:
     data = f.read().split("\n")
 
 id_max = 0
-ids = set()
+ids = []
 
 for board_pass in data:
 
@@ -21,9 +21,10 @@ for board_pass in data:
         x_lower, x_upper = split_lower(x_lower, x_upper) if char == "L" else split_upper(x_lower, x_upper)
 
     _id = y_lower * 8 + x_lower
-    ids.add(_id)
+    ids.append(_id)
     id_max = max(_id, id_max)
 
+ids.sort()
 second_id_iter = iter(ids)
 next(second_id_iter)
 
