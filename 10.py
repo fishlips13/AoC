@@ -38,12 +38,4 @@ for first, second in zip(adapters, adapters[1:]):
         diff_3_count += 1
 
 print(f"First by Third: {diff_1_count * diff_3_count}")
-
 print(f"Total Configurations: {num_configs(adapters, len(adapters)-1)}")
-
-
-# 0   
-# 1   (0)
-# 2   (1)  (0)
-# 3   (2)  (1)  (0)
-# 5   (3)  (2)
