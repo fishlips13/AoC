@@ -1,5 +1,5 @@
-# Advent of Code 2020
+# Advent of Code
  
-My AoC 2020 code.
+My AoC code.
 
 Feel free to laugh at my basic but WORKING solutions. :P
