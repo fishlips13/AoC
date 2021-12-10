@@ -4,19 +4,16 @@ with open("input\\02.txt") as f:
 
 position = 0
 depth = 0
-depth_bad = 0
 aim = 0
 
 for command, value in data:
     if command == "up":
-        depth_bad -= value
         aim -= value
     elif command == "down":
-        depth_bad += value
         aim += value
     else:
         position += value
         depth += aim * value
 
-print(f"Bad position X depth: {position * depth_bad}")
+print(f"Bad position X depth: {position * aim}")
 print(f"Good position X depth: {position * depth}")
