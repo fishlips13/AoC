@@ -1,5 +1,3 @@
-from collections import deque
-
 with open("input\\10.txt") as f:
     data = f.read().split("\n")
 
@@ -11,7 +9,7 @@ error_score = 0
 ac_scores = []
 
 for line in data:
-    start_stack = deque()
+    start_stack = []
 
     valid = True
     for bound in line:
