@@ -1,82 +1,90 @@
-from os import stat
+
 import re
-from itertools import permutations
 from queue import PriorityQueue
 from copy import deepcopy
-from dataclasses import dataclass, field
-from typing import Any
 
-@dataclass(order=True)
-class PrioritizedItem:
-    priority: tuple
-    item: Any=field(compare=False)
+def compress_state(grid):
+    return "-".join(["".join(i) for i in grid])
 
-class Node:
-    def __init__(self, x, y, size, used) -> None:
-        self.coords = (x, y)
-        self.size = size
-        self.used = used
-    
-    def avail(self) -> int:
-        return self.size - self.used
+def decompress_state(state):
+    grid = []
+    goal, empty = None, None
 
-def valid_moves(nodes, adjacent_only = True):
-    moves = []
+    rows = state.split("-")
+    for y, row in enumerate(rows):
+        grid.append([])
+        for x, cell in enumerate(row):
+            grid[y].append(cell)
+            if cell == "G":
+                goal = (x, y)
+            elif cell == "_":
+                empty = (x, y)
+
+    return grid, goal, empty
+
+def heuristic(curr, end):
+    return abs(end[0] - curr[1]) + abs(end[0] - curr[1])
+
+def fewest_steps(grid):
+    frontier = PriorityQueue()
+    frontier.put((0, 0, 0, compress_state(grid)))
+    state_cache = set()
     adjacents = {(0, 1), (1, 0), (0, -1), (-1, 0)}
 
-    for orig, dest in permutations(nodes, 2):
-        offset = (orig.coords[0] - dest.coords[0], orig.coords[1] - dest.coords[1])
-        if orig.used != 0 and dest.avail() >= orig.used and \
-            (not adjacent_only or offset in adjacents):
-            moves.append((orig.coords, dest.coords))
-
-    return moves
-
-def heuristic(coord):
-    return coord[0] + coord[1]
-
-def build_state(nodes, goal_coords):
-    states = {i.coords[0] + i.coords[1] * 100 : "." if i.used > 0 else "_" for i in nodes}
-    states[goal_coords[0] + goal_coords[1] * 100] = "G"
-    states_keys = list(states.keys())
-    states_keys.sort()
-    return "".join([states[i] for i in states_keys])
-
-def fewest_steps(nodes_base, end):
-    frontier = PriorityQueue()
-    frontier.put(PrioritizedItem((0, 0), (deepcopy(nodes_base), end)))
-    state_cache = set()
-
     while not frontier.empty():
-        item = frontier.get()
-        nodes, goal_curr = item.item
-        move_count = item.priority[0] + 1
-        print("yo")
-        for coords_from, coords_to in valid_moves(nodes.values()):
-            goal_new = goal_curr
-            if coords_from == goal_new:
-                if coords_to == (0, 0):
-                    return move_count
-                goal_new = coords_to
+        move_count, _, _, state = frontier.get()
+        
+        grid, goal, empty = decompress_state(state)
+        move_count += 1
+        
+        for adj in adjacents:
+            nx, ny = empty[0] + adj[0], empty[1] + adj[1]
+            if nx < 0 or nx >= len(grid[0]) or ny < 0 or ny >= len(grid) or grid[ny][nx] == "#":
+                continue
 
-            nodes_new = deepcopy(nodes)
-            nodes_new[coords_to].used += nodes_new[coords_from].used
-            nodes_new[coords_from].used -= nodes_new[coords_to].used
+            if (nx, ny) == goal and empty == (0, 0):
+                return move_count
 
-            state = build_state(nodes_new.values(), goal_new)
+            grid_new = deepcopy(grid)
+            grid_new[empty[1]][empty[0]] = grid_new[ny][nx]
+            grid_new[ny][nx] = "_"
+
+            state = compress_state(grid_new)
             if state in state_cache:
                 continue
             state_cache.add(state)
 
-            frontier.put(PrioritizedItem((move_count, heuristic(goal_new)), (nodes_new, goal_new)))
+            if grid_new[empty[1]][empty[0]] == "G":
+                goal_new = empty
+            else:
+                goal_new = goal
+
+            frontier.put((move_count, heuristic(goal_new, (0, 0)), heuristic(goal_new, empty), state))
 
 with open("input\\22.txt") as f:
     data = [[j for j in map(int, re.findall(r"\d+", i))] for i in f.read().split("\n")[2:]]
 
-nodes_base = {(i[0], i[1]) : Node(*i[:-2]) for i in data}
-x_highest = max([i.coords[0] for i in nodes_base.values()])
+x_max = max([i[0] for i in data])
+y_max = max([i[1] for i in data])
+grid = [[0 for _ in range(x_max + 1)] for _ in range(y_max + 1)]
 
-#valid_pairs = sum([1 for _ in valid_moves(nodes_base.values(), False)])
+valid_total = 0
+for line in data:
+    if line[3] == 0:
+        value = "_"
+    elif line[3] > 100:
+        value = "#"
+    elif line[0] == x_max and line[1] == 0:
+        value = "G"
+        valid_total += 1
+    else:
+        value = "."
+        valid_total += 1
+    grid[line[1]][line[0]] = value
 
-#print(f"Valid Pairs: {valid_pairs}")
-print(f"Fewest Steps: {fewest_steps(nodes_base, (x_highest, 0))}")
+print(f"Valid Pairs: {valid_total}")
+print(f"Fewest Steps: {fewest_steps(grid)}")
+
+
+# Slow AF, ~ 10 mins
+# Hand solvable, lul
