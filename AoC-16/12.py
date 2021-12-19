@@ -1,17 +1,4 @@
-with open("input\\12.txt") as f:
-    data = [i.split(" ") for i in f.read().split("\n")]
-
-cmds = []
-for line in data:
-    if line[0] == "cpy":
-        arg1 = int(line[1]) if line[1].isdigit() else line[1]
-        cmds.append((line[0], arg1, line[2]))
-    elif line[0] == "inc" or line[0] == "dec":
-        cmds.append((line[0], line[1]))
-    elif line[0] == "jnz":
-        cmds.append((line[0], line[1], int(line[2])))
-
-def run(regs):
+def run(cmds, regs):
     i = 0
     while i < len(cmds):
         cmd = cmds[i][0]
@@ -37,8 +24,21 @@ def run(regs):
     
     return regs["a"]
 
+def parse_cmd(cmd:str, arg1:str, arg2:str = None):
+    arg1 = int(arg1) if arg1.lstrip("-").isdigit() else arg1
+    if arg2:
+        arg2 = int(arg2) if arg2.lstrip("-").isdigit() else arg2
+    return (cmd, arg1, arg2)
+
+with open("input\\12.txt") as f:
+    data = [i.split(" ") for i in f.read().split("\n")]
+    
+cmds = []
+for line in data:
+    cmds.append(parse_cmd(*line))
+
 regs1 = {"a" : 0, "b" : 0, "c" : 0, "d" : 0}
 regs2 = {"a" : 0, "b" : 0, "c" : 1, "d" : 0}
 
-print(f"'a' register final: {run(regs1)}")
-print(f"'a' register final (initialised): {run(regs2)}")
+print(f"'a' register final: {run(cmds, regs1)}")
+print(f"'a' register final (initialised): {run(cmds, regs2)}")
