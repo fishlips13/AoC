@@ -22,25 +22,7 @@ def run(cmds, regs):
             value2 = regs[arg2] if arg2 in regs else arg2
             if value1 != 0:
                 i += value2 - 1
-
-        elif cmd == "tgl":
-            i_tgl = i + regs[arg1]
-            if i_tgl >= 0 and i_tgl < len(cmds):
-                tgl_cmd, tgl_arg1, tgl_arg2 = cmds[i_tgl]
-
-                if not tgl_arg2:
-                    if tgl_cmd == "inc":
-                        cmd_new = "dec"
-                    else:
-                        cmd_new = "inc"
-                else:
-                    if tgl_cmd == "jnz":
-                        cmd_new = "cpy"
-                    else:
-                        cmd_new = "jnz"
-
-                cmds[i_tgl] = (cmd_new, tgl_arg1, tgl_arg2)
-
+                
         elif cmd == "add":
             regs[arg1] += regs[arg2]
 
@@ -49,10 +31,11 @@ def run(cmds, regs):
 
         elif cmd == "nop":
             pass
+
+        elif cmd == "out":
+            yield regs[arg1]
             
         i += 1
-    
-    return regs["a"]
 
 def parse_cmd(cmd:str, arg1:str, arg2:str = None):
     arg1 = int(arg1) if arg1.lstrip("-").isdigit() else arg1
@@ -60,16 +43,33 @@ def parse_cmd(cmd:str, arg1:str, arg2:str = None):
         arg2 = int(arg2) if arg2.lstrip("-").isdigit() else arg2
     return (cmd, arg1, arg2)
 
-with open("input\\23-b.txt") as f:
+def find_lowest_clock():
+    value = 0
+    while True:
+        regs = {"a" : value, "b" : 0, "c" : 0, "d" : 0}
+        cache = set()
+
+        program = run(cmds, regs)
+        expected = 0
+        while True:
+            signal = next(program)
+            if signal != expected:
+                break
+
+            state = ",".join([str(regs[i]) for i in regs])
+            if state in cache:
+                return value
+
+            cache.add(state)
+            expected = (expected + 1) % 2
+
+        value += 1
+
+with open("input\\25.txt") as f:
     data = [i.split(" ") for i in f.read().split("\n")]
 
-regs1 = {"a" :  7, "b" : 0, "c" : 0, "d" : 0}
-regs2 = {"a" : 12, "b" : 0, "c" : 0, "d" : 0}
-
-cmds1 = []
+cmds = []
 for line in data:
-    cmds1.append(parse_cmd(*line))
-cmds2 = deepcopy(cmds1)
+    cmds.append(parse_cmd(*line))
 
-print(f"Safe Value: {run(cmds1, regs1)}")
-print(f"Safe Value: {run(cmds2, regs2)}")
+print(f"Lowest Clock: {find_lowest_clock()}")
