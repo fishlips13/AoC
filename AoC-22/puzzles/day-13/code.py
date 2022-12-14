@@ -5,7 +5,7 @@ def correct_pairs_index_sum(pairs):
     index_sum = 0
 
     for i, pair in enumerate(pairs, 1):
-        if correct_order(*pair) == 1:
+        if compare_packets(*pair) == 1:
             index_sum += i
     
     return index_sum
@@ -14,19 +14,20 @@ def decoder_key(pairs, devider_data):
     pairs.extend(devider_data)
     packets = [j for i in pairs for j in i]
     
-    packets.sort(key=cmp_to_key(correct_order), reverse=True)
+    packets.sort(key=cmp_to_key(compare_packets), reverse=True)
     
     decoder_key = 1
     for i, packet in enumerate(packets, 1):
-        if any([packets_same(packet, k) for j in devider_data for k in j]):
+        if  compare_packets(packet, devider_data[0][0]) == 0 or \
+            compare_packets(packet, devider_data[0][1]) == 0 :
             decoder_key *= i
     
     return decoder_key
 
-def correct_order(left, right):
+def compare_packets(left, right):
     if type(left) == list and type(right) == list:
         for sub_pair in zip(left, right):
-            correct = correct_order(*sub_pair)
+            correct = compare_packets(*sub_pair)
             if correct != 0:
                 return correct
         if len(left) == len(right):
@@ -34,9 +35,9 @@ def correct_order(left, right):
         else:
             return 1 if len(left) < len(right) else -1
     elif type(left) == list and type(right) == int:
-        return correct_order(left, [right])
+        return compare_packets(left, [right])
     elif type(left) == int and type(right) == list:
-        return correct_order([left], right)
+        return compare_packets([left], right)
     else:
         if left > right:
             return -1
@@ -44,20 +45,6 @@ def correct_order(left, right):
             return 0
         else:
             return 1
-
-def packets_same(packet1, packet2):
-    if type(packet1) != type(packet2):
-        return False
-    elif type(packet1) == int and type(packet2) == int:
-        return packet1 == packet2
-    elif len(packet1) != len(packet2):
-        return False
-    
-    for sub_packet1, sub_packet2 in zip(packet1, packet2):
-        if not packets_same(sub_packet1, sub_packet2):
-            return False
-
-    return True
 
 def parse_data(path):
     with open(path) as f:
