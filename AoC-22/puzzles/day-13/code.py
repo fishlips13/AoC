@@ -93,8 +93,8 @@ def puzzle():
     devider_data = parse_data("puzzles\\day-13\\devider_input.txt")
     answer2 = decoder_key(data, devider_data)
 
-    print(f"Part 1 -> : {answer1}")
-    print(f"Part 2 -> : {answer2}")
+    print(f"Part 1 -> Correct Index Sum: {answer1}")
+    print(f"Part 2 -> Decoder Key: {answer2}")
 
 tests()
 puzzle()
