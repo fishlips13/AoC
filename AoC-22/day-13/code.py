@@ -10,16 +10,16 @@ def correct_pairs_index_sum(pairs):
     
     return index_sum
 
-def decoder_key(pairs, devider_data):
-    pairs.extend(devider_data)
+def decoder_key(pairs, divider_data):
+    pairs.extend(divider_data)
     packets = [j for i in pairs for j in i]
     
     packets.sort(key=cmp_to_key(compare_packets), reverse=True)
     
     decoder_key = 1
     for i, packet in enumerate(packets, 1):
-        if  compare_packets(packet, devider_data[0][0]) == 0 or \
-            compare_packets(packet, devider_data[0][1]) == 0 :
+        if  compare_packets(packet, divider_data[0][0]) == 0 or \
+            compare_packets(packet, divider_data[0][1]) == 0 :
             decoder_key *= i
     
     return decoder_key
@@ -78,8 +78,8 @@ def tests():
     data = parse_data("puzzles\\day-13\\test_input.txt")
     test1_res = correct_pairs_index_sum(data)
 
-    devider_data = parse_data("puzzles\\day-13\\devider_input.txt")
-    test2_res = decoder_key(data, devider_data)
+    divider_data = parse_data("puzzles\\day-13\\divider_input.txt")
+    test2_res = decoder_key(data, divider_data)
 
     assert test1_res == test1_exp, f"{test1_res}, should be {test1_exp}"
     assert test2_res == test2_exp, f"{test2_res}, should be {test2_exp}"
@@ -90,8 +90,8 @@ def puzzle():
     data = parse_data("puzzles\\day-13\\input.txt")
     answer1 = correct_pairs_index_sum(data)
 
-    devider_data = parse_data("puzzles\\day-13\\devider_input.txt")
-    answer2 = decoder_key(data, devider_data)
+    divider_data = parse_data("puzzles\\day-13\\divider_input.txt")
+    answer2 = decoder_key(data, divider_data)
 
     print(f"Part 1 -> Correct Index Sum: {answer1}")
     print(f"Part 2 -> Decoder Key: {answer2}")
