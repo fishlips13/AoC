@@ -63,7 +63,7 @@ def tests():
     test1_exp = 21
     test2_exp = 8
 
-    data = parse_data("puzzles\\day-08\\test_input.txt")
+    data = parse_data("day-08\\test_input.txt")
     test1_res = outside_visible_count(data)
     test2_res = scenic_score_max(data)
 
@@ -73,7 +73,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-08\\input.txt")
+    data = parse_data("day-08\\input.txt")
     answer1 = outside_visible_count(data)
     answer2 = scenic_score_max(data)
 

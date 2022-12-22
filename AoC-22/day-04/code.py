@@ -34,7 +34,7 @@ def tests():
     test1_exp = 2
     test2_exp = 4
 
-    pairs = parse_data("puzzles\\day-04\\test_input.txt")
+    pairs = parse_data("day-04\\test_input.txt")
     test1_res = full_overlap_count(pairs)
     test2_res = partial_overlap_count(pairs)
 
@@ -44,7 +44,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    pairs = parse_data("puzzles\\day-04\\input.txt")
+    pairs = parse_data("day-04\\input.txt")
     answer1 = full_overlap_count(pairs)
     answer2 = partial_overlap_count(pairs)
 

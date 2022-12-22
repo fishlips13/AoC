@@ -75,10 +75,10 @@ def tests():
     test1_exp = 13
     test2_exp = 140
 
-    data = parse_data("puzzles\\day-13\\test_input.txt")
+    data = parse_data("day-13\\test_input.txt")
     test1_res = correct_pairs_index_sum(data)
 
-    divider_data = parse_data("puzzles\\day-13\\divider_input.txt")
+    divider_data = parse_data("day-13\\divider_input.txt")
     test2_res = decoder_key(data, divider_data)
 
     assert test1_res == test1_exp, f"{test1_res}, should be {test1_exp}"
@@ -87,10 +87,10 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-13\\input.txt")
+    data = parse_data("day-13\\input.txt")
     answer1 = correct_pairs_index_sum(data)
 
-    divider_data = parse_data("puzzles\\day-13\\divider_input.txt")
+    divider_data = parse_data("day-13\\divider_input.txt")
     answer2 = decoder_key(data, divider_data)
 
     print(f"Part 1 -> Correct Index Sum: {answer1}")

@@ -13,7 +13,7 @@ def tests():
     test1_res = 24000
     test2_res = 45000
 
-    cal_totals = cal_totals_sorted("puzzles\\day-01\\test_input.txt")
+    cal_totals = cal_totals_sorted("day-01\\test_input.txt")
     cal_top_3_total = sum(cal_totals[0:3])
 
     assert cal_totals[0] == test1_res, f"{cal_totals[0]}, should be {test1_res}"
@@ -22,7 +22,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    cal_totals = cal_totals_sorted("puzzles\\day-01\\input.txt")
+    cal_totals = cal_totals_sorted("day-01\\input.txt")
     top_3_total = sum(cal_totals[0:3])
 
     print(f"Part 1 -> Calorie Max: {cal_totals[0]}")

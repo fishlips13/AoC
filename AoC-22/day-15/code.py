@@ -66,7 +66,7 @@ def tests():
     test1_exp = 26
     test2_exp = 56000011
 
-    data = parse_data("puzzles\\day-15\\test_input.txt")
+    data = parse_data("day-15\\test_input.txt")
     test1_res = row_impossibles(data, 10)
     test2_res = tuning_frequency(data, 20)
 
@@ -76,7 +76,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-15\\input.txt")
+    data = parse_data("day-15\\input.txt")
     answer1 = row_impossibles(data, 2000000)
     answer2 = tuning_frequency(data, 4000000)
 

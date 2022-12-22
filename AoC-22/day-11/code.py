@@ -59,7 +59,7 @@ def tests():
     test1_exp = 10605
     test2_exp = 2713310158
 
-    data = parse_data("puzzles\\day-11\\test_input.txt")
+    data = parse_data("day-11\\test_input.txt")
     test1_res = monkey_bus(deepcopy(data), 20)
     test2_res = monkey_bus(deepcopy(data), 10000, False)
 
@@ -69,7 +69,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-11\\input.txt")
+    data = parse_data("day-11\\input.txt")
     answer1 = monkey_bus(deepcopy(data), 20)
     answer2 = monkey_bus(deepcopy(data), 10000, False)
 

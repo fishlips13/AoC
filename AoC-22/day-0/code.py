@@ -14,7 +14,7 @@ def tests():
     test1_exp = None
     test2_exp = None
 
-    data = parse_data("puzzles\\day-0\\test_input.txt")
+    data = parse_data("day-0\\test_input.txt")
     test1_res = func1(data)
     test2_res = func2(data)
 
@@ -24,7 +24,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-0\\input.txt")
+    data = parse_data("day-0\\input.txt")
     answer1 = func1(data)
     answer2 = func2(data)
 

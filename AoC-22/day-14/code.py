@@ -101,7 +101,7 @@ def tests():
     test1_exp = 24
     test2_exp = 93
 
-    data = parse_data("puzzles\\day-14\\test_input.txt")
+    data = parse_data("day-14\\test_input.txt")
     test1_res = find_rest_count(deepcopy(data))
     test2_res = find_rest_count_floor(deepcopy(data))
 
@@ -111,7 +111,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-14\\input.txt")
+    data = parse_data("day-14\\input.txt")
     answer1 = find_rest_count(deepcopy(data))
     answer2 = find_rest_count_floor(deepcopy(data))
 

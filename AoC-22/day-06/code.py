@@ -14,7 +14,7 @@ def tests():
     test1_exp = 5
     test2_exp = 23
 
-    data = parse_data("puzzles\\day-06\\test_input.txt")
+    data = parse_data("day-06\\test_input.txt")
     test1_res = first_marker_start(data, 4)
     test2_res = first_marker_start(data, 14)
 
@@ -24,7 +24,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-06\\input.txt")
+    data = parse_data("day-06\\input.txt")
     answer1 = first_marker_start(data, 4)
     answer2 = first_marker_start(data, 14)
 

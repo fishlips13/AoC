@@ -23,9 +23,9 @@ def score_real(path):
     return sum([real_lookup[i][j] for i, j in turns])
 
 def tests():
-    test1_res = score_naive("puzzles\\day-02\\test_input.txt")
+    test1_res = score_naive("day-02\\test_input.txt")
     test1_exp = 15
-    test2_res = score_real("puzzles\\day-02\\test_input.txt")
+    test2_res = score_real("day-02\\test_input.txt")
     test2_exp = 12
 
     assert test1_res == test1_exp, f"{test1_res}, should be {test1_exp}"
@@ -34,8 +34,8 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    naive_res = score_naive("puzzles\\day-02\\input.txt")
-    real_res = score_real("puzzles\\day-02\\input.txt")
+    naive_res = score_naive("day-02\\input.txt")
+    real_res = score_real("day-02\\input.txt")
 
     print(f"Part 1 -> Game Score: {naive_res}")
     print(f"Part 2 -> Game Real: {real_res}")

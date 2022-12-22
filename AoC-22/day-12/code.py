@@ -68,7 +68,7 @@ def tests():
     test1_exp = 31
     test2_exp = 29
 
-    data = parse_data("puzzles\\day-12\\test_input.txt")
+    data = parse_data("day-12\\test_input.txt")
     test1_res = steps_to_summit(data)
     test2_res = shortest_low_route(data)
 
@@ -78,7 +78,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-12\\input.txt")
+    data = parse_data("day-12\\input.txt")
     answer1 = steps_to_summit(data)
     answer2 = shortest_low_route(data)
 

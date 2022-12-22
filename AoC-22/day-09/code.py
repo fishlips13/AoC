@@ -62,8 +62,8 @@ def tests():
     test2_exp = 1
     test3_exp = 36
 
-    data1 = parse_data("puzzles\\day-09\\test_input_1.txt")
-    data2 = parse_data("puzzles\\day-09\\test_input_2.txt")
+    data1 = parse_data("day-09\\test_input_1.txt")
+    data2 = parse_data("day-09\\test_input_2.txt")
     test1_res = short_tail_positions(data1)
     test2_res = long_tail_positions(data1)
     test3_res = long_tail_positions(data2)
@@ -75,7 +75,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-09\\input.txt")
+    data = parse_data("day-09\\input.txt")
     answer1 = short_tail_positions(data)
     answer2 = long_tail_positions(data)
 

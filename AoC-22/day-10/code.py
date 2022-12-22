@@ -52,7 +52,7 @@ def tests():
                            "######......######......######......####",
                            "#######.......#######.......#######....."])
 
-    data = parse_data("puzzles\\day-10\\test_input.txt")
+    data = parse_data("day-10\\test_input.txt")
     test1_res = signal_strength_sum(data)
     test2_res = render_crt(data)
 
@@ -62,7 +62,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-10\\input.txt")
+    data = parse_data("day-10\\input.txt")
     answer1 = signal_strength_sum(data)
     answer2 = render_crt(data)
 

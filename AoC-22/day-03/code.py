@@ -42,8 +42,8 @@ def tests():
     test1_exp = 157
     test2_exp = 70
 
-    test1_res = priority_sum("puzzles\\day-03\\test_input.txt")
-    test2_res = badge_sum("puzzles\\day-03\\test_input.txt")
+    test1_res = priority_sum("day-03\\test_input.txt")
+    test2_res = badge_sum("day-03\\test_input.txt")
 
     assert test1_res == test1_exp, f"{test1_res}, should be {test1_exp}"
     assert test2_res == test2_exp, f"{test2_res}, should be {test2_exp}"
@@ -51,8 +51,8 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    mistake_priorities = priority_sum("puzzles\\day-03\\input.txt")
-    badge_priorities = badge_sum("puzzles\\day-03\\input.txt")
+    mistake_priorities = priority_sum("day-03\\input.txt")
+    badge_priorities = badge_sum("day-03\\input.txt")
 
     print(f"Part 1 -> Sum of Mistake Priorities: {mistake_priorities}")
     print(f"Part 2 -> Sum of Badge Priorities: {badge_priorities}")

@@ -62,7 +62,7 @@ def tests():
     test1_exp = 95437
     test2_exp = 24933642
 
-    data = parse_data("puzzles\\day-07\\test_input.txt")
+    data = parse_data("day-07\\test_input.txt")
     test1_res = find_total_10000(data)
     test2_res = delete_size(data)
 
@@ -72,7 +72,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    data = parse_data("puzzles\\day-07\\input.txt")
+    data = parse_data("day-07\\input.txt")
     answer1 = find_total_10000(data)
     answer2 = delete_size(data)
 

@@ -44,7 +44,7 @@ def tests():
     test1_exp = "CMZ"
     test2_exp = "MCD"
 
-    stacks, instrs = parse_data("puzzles\\day-05\\test_input.txt")
+    stacks, instrs = parse_data("day-05\\test_input.txt")
     test1_res = rearrange9000_tops(deepcopy(stacks), instrs)
     test2_res = rearrange9001_tops(deepcopy(stacks), instrs)
 
@@ -54,7 +54,7 @@ def tests():
     print("Tests passed")
 
 def puzzle():
-    stacks, instrs = parse_data("puzzles\\day-05\\input.txt")
+    stacks, instrs = parse_data("day-05\\input.txt")
     answer1 = rearrange9000_tops(deepcopy(stacks), instrs)
     answer2 = rearrange9001_tops(deepcopy(stacks), instrs)
 
